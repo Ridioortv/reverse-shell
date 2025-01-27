@@ -1,0 +1,11 @@
+descargar visual estudio code
+postman
+mysql worbench
+en el power shell actualizar la vercion de pip de pyhon mientras el entorno virtual este activo 
+crear entorno virtual: python -m venv venv y activarlo con .\venv\Scripts\Activate.ps1
+instalar flask pip install flask
+installar pip install mysql-connector-python requests
+activar python main.py
+eso es todo en powershell
+
+

@@ -1,0 +1,11 @@
+CREATE TABLE consultas_peligrosas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    consulta TEXT NOT NULL,
+    ip VARCHAR(45) NOT NULL,
+    latitud FLOAT,
+    longitud FLOAT,
+    pais VARCHAR(100),
+    region VARCHAR(100),
+    ciudad VARCHAR(100),
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
